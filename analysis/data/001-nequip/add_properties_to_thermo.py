@@ -336,6 +336,10 @@ def main(add_property, write_run_serie_dataset, write_properties_dataset, overwr
 
 
 if __name__ == "__main__":
+    # Makes sure the output directories exists
+    for path in [path_to_dataset / folder for folder in ['thermo-prop', 'thermo-prop-flat']]:
+        path.mkdir(parents=True, exist_ok=True) 
+
     add_property = {'rdf': True, 'msd': True,
                     'msd_by_run_id': True, 'elastic': False, 'pore': True, 'cn': True, 'bad':True, 'bad_by_cn':True, 'reduction': True, 'ring':True}
     write_run_serie_dataset = True                    

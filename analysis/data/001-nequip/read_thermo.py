@@ -332,4 +332,8 @@ def main(path_to_traj, path_to_dataset, overwrite = False):
 
 
 if __name__ == "__main__":
+    # Makes sure the output directories exists
+    for path in [path_to_dataset / folder for folder in ['thermo', 'thermo-flat']]:
+        path.mkdir(parents=True, exist_ok=True) 
+
     main(path_to_traj, path_to_dataset, overwrite = False)

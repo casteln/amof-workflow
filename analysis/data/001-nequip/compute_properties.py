@@ -254,6 +254,10 @@ def compute_properties(da, path_to_traj, path_to_output, compute_property, overw
 def main(compute_property, overwrite=False):
     dataset_name = 'thermo.comp.nc'
 
+    # Makes sure the output directories exists
+    for path in [*list(path_to_output.values())]:
+        path.mkdir(parents=True, exist_ok=True) 
+
     logger.info("Start compute properties")
 
     for filename in path_to_dataset.glob('thermo/run_serie_*[0-9].comp.nc'):

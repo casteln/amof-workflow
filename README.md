@@ -19,6 +19,14 @@ Input the desired settings in `run_lammps.ini` and launch `run_lammps.py`:
 python run_lammps.py
 ```
 
+When the simulation is over, concatenate the multiple restarts (only one in this example) and compress unused files.
+
+```
+python concatenate_runs.py compress
+```
+
+TODO: detail compress/decompress
+
 ## Launch analysis with amof
 
 In `analysis/data/001-nequip`
