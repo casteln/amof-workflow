@@ -2,16 +2,9 @@
 
 # Standard libraries
 import os
-import sys
-import glob
-import time
-import datetime
 
 import atomman as am
-import atomman.lammps as lmp
-import atomman.unitconvert as uc
 
-import pickle
 import json
 import shutil
 import itertools 
@@ -21,7 +14,6 @@ import pandas as pd
 import numpy as np
 
 # Logging
-
 import logging
 
 import configparser
@@ -144,13 +136,8 @@ def write_lammps_input(folder_path, parameters, run_part, run_part_name, first_r
     rawfiles_path = pathlib.Path(config['path']['rawfiles'])
     folder_path.mkdir(parents=True, exist_ok=True)
     shutil.copy(rawfiles_path / f"{parameters['model']}.pth", folder_path)
-    # change to selective copy + glob for relevant restart
-    # shutil.copy(f'{config['path']['rawfiles']}ffield_ZnN_2016', folder_path, dirs_exist_ok=True)
     run_on = config['configuration']['run_on']
 
-    # setting additional parameters
-    # parameters['nodes'] = config['configuration']['nodes']
-    # parameters['ntasks'] = int(parameters['nodes']) * 24
     parameters['code.minimize'] = ''
     
     parameters['initial_restart_file'] = 'initial.restart'
@@ -338,6 +325,8 @@ def run_exp(constant, variable, id, previous_folder = None, next_folder = None):
     if config['configuration']['variation.style'] != 'successive':
         write_sub_restart(run_exp, prev_nb_restarts, nb_restarts)
 
+    # Uncomment the following block for restart, and comment write_lammps_input and write_sub_restart above
+
     # i_restart += 1
     # prev_nb_restarts = nb_restarts
     # nb_restarts = int(config['configuration'][f'num.restart{i_restart}'])
@@ -355,40 +344,6 @@ def run_exp(constant, variable, id, previous_folder = None, next_folder = None):
     #     write_lammps_input(folder, parameters, 1, 'equilibrate', next_folder = next_folder_restart, previous_folder = previous_folder_restart) # comment line for restarts if already ran
     # if config['configuration']['variation.style'] != 'successive':
     #     write_sub_restart(run_exp, prev_nb_restarts, nb_restarts)
-
-    # # deform
-    # nb_restarts = int(config['configuration']['num.restart0'])
-    # nb_restarts_equilibration = int(config['configuration']['num.restart1'])
-    # prev_nb_restarts = 0
-    # for i in range(nb_restarts):
-    #     parameters['code.deform'], simulation_time, run_description = nvt(f'deform.{i+1}', int(parameters['temp']), int(parameters['temp']), float(parameters['time.deform']), simulation_time, parameters, run_description, volume_change=float(parameters['delta_volume']))
-
-    #     folder = f'{run_exp}/restart{i}'
-    #     first_run = (i == 0) and (previous_folder is None)
-    #     first_run_exp = (i == 0)
-    #     next_folder_restart = f'restart{i+1}' if i + 1 < nb_restarts_equilibration else next_folder # handles next_folder=None in input
-    #     previous_folder_restart = previous_folder if (i == 0) else None
-    #     parameters['job-name'] = '-'.join([str(int(config['system_info']['run_serie'])), str(id), str(i)])
-    #     write_lammps_input(folder, parameters, 1, 'deform', first_run = first_run, next_folder = next_folder_restart, previous_folder = previous_folder_restart, first_run_exp = first_run_exp) # comment line for restarts if already ran
-    # if config['configuration']['variation.style'] != 'successive':
-    #     write_sub_restart(run_exp, prev_nb_restarts, nb_restarts)
-
-    # # equilibration
-    # previous_nb_restarts = nb_restarts
-    # nb_restarts = int(config['configuration']['num.restart1'])
-    # for i in range(previous_nb_restarts, nb_restarts):
-    #     parameters['code.equilibrate'], simulation_time, run_description = nvt(f'equilibrate.{i-previous_nb_restarts+1}', int(parameters['temp']), int(parameters['temp']), float(parameters['time.equilibrate']), simulation_time, parameters, run_description, multiple_restarts=int(parameters['num.equilibrate.write']))
-
-    #     folder = f'{run_exp}/restart{i}'
-    #     first_run = (i == 0) and (previous_folder is None)
-    #     first_run_exp = (i == 0)
-    #     next_folder_restart = f'restart{i+1}' if i + 1 < nb_restarts else next_folder # handles next_folder=None in input
-    #     previous_folder_restart = previous_folder if (i == 0) else None
-    #     parameters['job-name'] = '-'.join([str(int(config['system_info']['run_serie'])), str(id), str(i)])
-    #     write_lammps_input(folder, parameters, 2, 'equilibrate', first_run = first_run, next_folder = next_folder_restart, previous_folder = previous_folder_restart, first_run_exp = first_run_exp) # comment line for restarts if already ran
-    # if config['configuration']['variation.style'] != 'successive':
-    #     write_sub_restart(run_exp, prev_nb_restarts, nb_restarts)
-
 
     write_description(run_exp, output_dict, run_description)
 
