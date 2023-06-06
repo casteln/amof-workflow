@@ -39,12 +39,13 @@ TODO: detail options
 
 ## Look at the results in jupyter notebooks
 
+Open `analysis/run_results/001-nequip/001 - look at single MD run.ipynb` with jupyter notebook.
 
 # Dev
 
 ## Current version
 
-Minimally workings
+Minimal with the simplest nequip job
 
 ## Todo
 
@@ -65,3 +66,5 @@ Add an example input/analysis for every sort of MD sim I used
 Add a nicer doc:
 - [ ] this readme
 - [ ] examples
+
+Add extended comments on the python requirements
