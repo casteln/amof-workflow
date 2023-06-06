@@ -1,0 +1,3 @@
+# Read geometry from restart file
+atom_style      atomic
+read_restart    {initial_restart_file}

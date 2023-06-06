@@ -1,0 +1,8 @@
+# Create geometry from a structure file
+atom_style      atomic
+read_data       {initial_data_file}
+
+change_box      all triclinic
+
+# create a 222 supercell
+replicate {supercell}

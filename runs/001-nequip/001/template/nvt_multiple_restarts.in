@@ -1,0 +1,5 @@
+restart         {freq_restart}  {output_name}_{T_f}K.restart.*
+fix             4  all  nvt temp  {T_i}  {T_f}  {tdamp}
+run             {run_time} 
+write_data      {output_name}_{T_f}K.data.*
+unfix 4

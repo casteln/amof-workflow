@@ -1,0 +1,36 @@
+# Zn/N 
+units           metal
+
+## Boundary condition
+dimension       3
+boundary        p p p
+
+# added to fix following error:
+# ERROR: Pair style NEQUIP requires newton pair off (src/pair_nequip.cpp:108)
+newton off
+
+{code.read_file}
+
+# Apply NequIP potentials
+pair_style	nequip
+pair_coeff	* * {model}.pth C  H  N  Zn
+
+
+# Same neighbours code than in pair_nequip test
+neighbor	    1.0 bin
+neigh_modify    delay 0 every 1 check no
+
+{code.minimize}
+
+timestep        {timestep}
+thermo          {freq.thermo}
+thermo_style    custom step time pe ke etotal evdwl ecoul enthalpy temp press vol density cella cellb cellc cellalpha cellbeta cellgamma pxx pyy pzz pxy pxz pyz
+thermo_modify   format float %15.14g
+
+dump            1 all custom {freq.dump} dump_vel id type x y z
+dump            2 all xyz {freq.dump} ZIF4.xyz 
+restart         5000 backup1.restart backup2.restart
+dump_modify     1 sort id element C H N Zn
+dump_modify     2 sort id element C H N Zn
+
+{code.part}

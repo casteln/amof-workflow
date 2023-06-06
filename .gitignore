@@ -1,0 +1,34 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!*.py
+!*.ini
+!*.md
+!*runserie_description.csv
+!**/template/*
+!**/template/*/*
+!code/zay/archive*
+!code/transfers/*
+!system_preparation/MOF-FF/ZIF4_15glass/ff/*.fpar
+!training/*/[0-9][0-9][0-9]_*/*.yaml
+!scaling/*/[0-9][0-9][0-9]_*/*.yaml
+!training/*/[0-9][0-9][0-9]_*/*.sbatch
+!training/*/[0-9][0-9][0-9]_*/*.sh
+# !training/*/[0-9][0-9][0-9]_*/config/*.yaml
+# !template.latex
+# etc...
+
+# ...even if they are in subdirectories
+!*/
+
+# if the files to be tracked are in subdirectories
+# !*/a/b/file1.txt
+# !*/a/b/c/*
+
+# unless they are named this way:
+**/restart*/n[vp]t_md.py
+**/restart*/change_volume.py
+**/restart*/create_supercell.py
+**/wandb/settings

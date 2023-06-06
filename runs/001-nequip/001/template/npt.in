@@ -1,0 +1,5 @@
+fix             4  all  npt temp  {T_i}  {T_f}  {tdamp} {barostat.keyword} {pressure} {pressure} {pdamp}
+run             {run_time} 
+write_data      {output_name}_{T_f}K.data.*
+write_restart   {output_name}_{T_f}K.restart.*
+unfix 4

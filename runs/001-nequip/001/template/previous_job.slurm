@@ -1,0 +1,1 @@
+cp ../{previous_folder}/{final_restart_file} {initial_restart_file}

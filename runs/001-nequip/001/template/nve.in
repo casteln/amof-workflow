@@ -1,0 +1,7 @@
+fix             4 all nve
+fix             5 all temp/berendsen {T_i}  {T_f}  100.0
+run             {run_time}
+write_data      {output_name}_{T_f}K.data.*
+write_restart   {output_name}_{T_f}K.restart.*
+unfix 4
+unfix 5

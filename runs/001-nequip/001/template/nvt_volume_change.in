@@ -1,0 +1,8 @@
+fix             4  all  nvt temp  {T_i}  {T_f}  {tdamp}
+fix             5 all deform 1 x scale {linear_scale} y scale {linear_scale} z scale {linear_scale}
+run             {run_time} 
+write_data      {output_name}_{T_f}K.data.*
+write_restart   {output_name}_{T_f}K.restart.*
+unfix 4
+unfix 5
+

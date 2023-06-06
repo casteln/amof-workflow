@@ -1,0 +1,2 @@
+"run_serie","machine_used","starting_date","include_in_dataset","compute_elastic_constants","system","mof","model","implementation","run_serie_description"
+1,zay,01/06/2023,True,False,crystal,ZIF-4,l2r6stress0,lammps,NVT run (100ps) of 300K crystal starting from initial xyz file and l2r6stress0.
