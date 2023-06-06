@@ -150,7 +150,7 @@ def write_lammps_input(folder_path, parameters, run_part, run_part_name, first_r
         #     shutil.copy(file, folder_path)
         #     parameters['initial_restart_file'] = restart_file
         # parameters['code.read_file'] = read_template('read_restart', parameters)
-        for file in rawfiles_path.glob(f"crystal.lmp"): 
+        for file in rawfiles_path.glob(f"initial.lmp"): 
             data_file = pathlib.Path(file).name
             shutil.copy(file, folder_path)
             parameters['initial_data_file'] = data_file

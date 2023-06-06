@@ -13,8 +13,11 @@ TODO
 
 In `runs/001-nequip/001`
 
-Input the desired settings in `run_lammps.ini` and launch `run_lammps.py`:
+Input the desired settings in `run_lammps.ini`, change the input lammps data file `initial.lmp` and MLP model in `raw_files`.
 
+`template/job_zay.slurm` is dependant on the cluster it is launched on, and should be updated (e.g. with the correct path to the LAMMPS installation).
+
+Then launch `run_lammps.py`:
 ```
 python run_lammps.py
 ```
