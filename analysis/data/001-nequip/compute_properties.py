@@ -114,7 +114,7 @@ def compute_properties_by_run_id(x, path_to_traj, path_to_output, compute_proper
             traj = construct_traj(x, path_to_traj, sampling_rate=default_sampling_rate)
         logger.info("Compute coordination number of %s", filename)
         cn = scn.CoordinationNumber.from_trajectory(
-            traj, {'Zn-N': 2.5}, delta_Step=int(x['freq.dump']), first_frame = int(x.first_step), parallel=True)
+            traj, {'Zn-N': 2.5}, delta_Step= default_sampling_rate * int(x['freq.dump']), first_frame = int(x.first_step), parallel=True)
         cn.write_to_file(path_to_output['cn'] / filename)
     if compute_property['bad'] and (overwrite or not (path_to_output['bad'] / f'{filename}.bad').exists()):
         if traj is None:
